@@ -16,3 +16,14 @@ jobs:
         run: |
           echo "${{ github.event.head_commit.message }}"
           echo "${GITHUB_SHA}"
+      
+      - name: Extract tag name
+        id: extract_tag
+        run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: Print tag name
+        run: echo "Tag Name is $TAG_NAME"
+
+      - name: Do something with the tag
+        run: |
+          echo "Deploying version $TAG_NAME"
